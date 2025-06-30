@@ -7,4 +7,4 @@ export async function signIn({ id, password }) {
   });
 }
 
-// 추후 수정
+// 추후 서버 방식에 따라 수정
