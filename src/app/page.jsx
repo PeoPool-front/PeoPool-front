@@ -9,8 +9,8 @@ export default function HomePage() {
         <Logo src="/logo.png" alt="logo" />
 
         <ButtonGroup>
-          <HeaderButton>회원가입</HeaderButton>
           <HeaderButton>Sign Up</HeaderButton>
+          <HeaderButton>Sign In</HeaderButton>
         </ButtonGroup>
       </HeaderContainer>
       <TitleContainer>
