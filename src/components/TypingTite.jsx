@@ -7,10 +7,11 @@ function TypingTitle({ text, delay = 100, highlightWord = "peopool", as: Compone
   const [index, setIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true);
   const [typingDone, setTypingDone] = useState(false);
+  const [cursorVisibleAfterDone, setCursorVisibleAfterDone] = useState(true);
 
   const chars = [...text];
   const styledChars = [];
-  for (let i = 0; i < chars.length; ) {
+  for (let i = 0; i < chars.length;) {
     if (text.slice(i, i + highlightWord.length) === highlightWord) {
       for (let j = 0; j < highlightWord.length; j++) {
         styledChars.push({ char: highlightWord[j], colored: true });
@@ -46,10 +47,13 @@ function TypingTitle({ text, delay = 100, highlightWord = "peopool", as: Compone
     };
   }, [delay, styledChars.length, typingDone]);
 
-
   useEffect(() => {
-    if (typingDone && onDone) {
-      onDone();
+    if (typingDone) {
+      if (onDone) onDone();
+      const timeout = setTimeout(() => {
+        setCursorVisibleAfterDone(false);
+      }, 1000);
+      return () => clearTimeout(timeout);
     }
   }, [typingDone, onDone]);
 
@@ -62,7 +66,7 @@ function TypingTitle({ text, delay = 100, highlightWord = "peopool", as: Compone
           <span key={idx}>{item.char}</span>
         )
       )}
-      {!typingDone && (
+      {(typingDone ? cursorVisibleAfterDone : true) && (
         <Cursor style={{ visibility: showCursor ? "visible" : "hidden" }}>|</Cursor>
       )}
     </Component>
