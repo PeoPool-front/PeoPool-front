@@ -8,7 +8,6 @@ export default function CommunityPage() {
 }
 
 const Container = styled.div`
-  margin-top: 5rem;
   display: flex;
   justify-content: center;
 `;
