@@ -1,35 +1,66 @@
 "use client";
 
-import React from "react";
-import styled from "styled-components";
+import React, {useState} from "react";
+import styled, { keyframes } from "styled-components";
+import TypingTitle from "@/components/TypingTite";
+
+const fadeInUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+
+
 export default function HomePage() {
+  const [step, setStep] = useState(0); 
+
   return (
     <Container>
       <HeaderContainer>
         <Logo src="/logo.png" alt="logo" />
-
         <ButtonGroup>
           <HeaderButton>Sign Up</HeaderButton>
           <HeaderButton>Sign In</HeaderButton>
         </ButtonGroup>
       </HeaderContainer>
+
       <TitleContainer>
-        <Title1> 
-          손쉽게 구하는 학습 메이트, <br />
-          <span style={{color: '#ffd200'}}>peopool</span>이면 되니까.
-        </Title1>
-        <Title2>
-            교내대회, 한솥밥, 어울림 ··· <br />
-            여기서 다 되니까.
-        </Title2>
-        <ButtonGroup>
-          <HeaderButton>Learn More</HeaderButton>
-        </ButtonGroup>
+        {step >= 0 && (
+          <TypingTitle
+            text={"손쉽게 구하는 학습 메이트,\npeopool이면 되니까."}
+            delay={90}
+            highlightWord="peopool"
+            as={Title1}
+            onDone={() => setStep(1)} 
+          />
+        )}
+
+        {step >= 1 && (
+          <TypingTitle
+            text={"교내대회, 한솥밥, 어울림 ···\n여기서 다 되니까."}
+            delay={90}
+            as={Title2}
+            onDone={() => setStep(2)}
+          />
+        )}
+
+        {step === 2 && (
+            <AnimatedHeaderButton>Learn More</AnimatedHeaderButton>
+        )}
       </TitleContainer>
-      <LandingImg src="/landingImg.png" alt="landing"/>
+
+      <LandingImg src="/landingImg.png" alt="landing" />
     </Container>
   );
 }
+
+
 
 const Container = styled.div`
   position: relative;
@@ -79,6 +110,7 @@ const HeaderButton = styled.button`
   border-radius: 0.25rem;
   font-weight: 500;
   cursor: pointer;
+  width: fit-content;
 
   &:hover {
     background-color: #5a86ce;
@@ -98,6 +130,7 @@ const Title1 = styled.p`
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.5px;
+  white-space: pre-line;
 `;
 
 const Title2 = styled.p`
@@ -106,4 +139,12 @@ const Title2 = styled.p`
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.5px;
+  white-space: pre-line;  
+`;
+
+
+const AnimatedHeaderButton = styled(HeaderButton)`
+  animation: ${fadeInUp} 1s ease-out forwards;
+  width: fit-content;  
+  align-self: flex-start; 
 `;
