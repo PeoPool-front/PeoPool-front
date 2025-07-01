@@ -24,7 +24,7 @@ export default function Header() {
   const handleMouseLeave = () => setIsOpen(false);
 
   // 로그인/회원가입/랜딩 페이지에서는 Header 숨김
-  if (pathname === "/signIn" || pathname === "/signup") {
+  if (pathname === "/signIn" || pathname === "/signup" || pathname === "/") {
     return null;
   }
 

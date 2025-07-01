@@ -1,13 +1,7 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
 
 export default function CommunityPage() {
-  return <Container>CommunityPage</Container>;
+  return <div className="flex justify-center">CommunityPage</div>;
 }
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-`;
